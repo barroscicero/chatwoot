@@ -52,7 +52,7 @@
   "addons": [ "heroku-redis", "heroku-postgresql"],
   "buildpacks": [
     {
-      "url": "heroku/ruby"
+      "url": "heroku/ruby:20"
     }
   ],
   "environments": {
