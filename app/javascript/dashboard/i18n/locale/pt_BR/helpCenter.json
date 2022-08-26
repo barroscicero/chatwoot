@@ -112,7 +112,7 @@
       },
       "ADD": {
         "TITLE": "Criar um portal",
-        "SUB_TITLE": "Um Centro de Ajuda no Chatwoot é conhecido como um portal. Você pode ter vários portais e pode ter diferentes localidades para cada portal.",
+        "SUB_TITLE": "Um Centro de Ajuda na Plataforma é conhecido como um portal. Você pode ter vários portais e pode ter diferentes localidades para cada portal.",
         "NAME": {
           "LABEL": "Nome",
           "PLACEHOLDER": "Nome do portal",
