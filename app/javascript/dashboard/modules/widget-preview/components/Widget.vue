@@ -29,7 +29,7 @@
       >
         <img
           v-if="!isWidgetVisible"
-          src="~dashboard/assets/images/bubble-logo.png"
+          src="~dashboard/assets/images/bubble-logo.svg"
           alt=""
         />
         <div>
