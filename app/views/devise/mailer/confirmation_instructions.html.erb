@@ -1,14 +1,14 @@
-<p>Welcome, <%= @resource.name %>!</p>
+<p>Bem-vindo, <%= @resource.name %>!</p>
 
 <% account_user = @resource&.account_users&.first %>
 <% if account_user&.inviter.present? && @resource.unconfirmed_email.blank? %>
-  <p><%= account_user.inviter.name %>, with <%= account_user.account.name %>, has invited you to try out <%= global_config['BRAND_NAME'] || 'Chatwoot' %>! </p>
+  <p><%= account_user.inviter.name %>, com <%= account_user.account.name %>, convidou você para participar da plataforma <%= global_config['BRAND_NAME'] || 'Teresa 360' %>! </p>
 <% end %>
 
-<p>You can confirm your account email through the link below:</p>
+<p>Você pode confirmar seu acesso através do link abaixo:</p>
 
 <% if account_user&.inviter.present? && @resource.unconfirmed_email.blank?  %>
-<p><%= link_to 'Confirm my account', frontend_url('auth/password/edit', reset_password_token: @resource.send(:set_reset_password_token)) %></p>
+  <p><%= link_to 'Confirmar minha conta', frontend_url('auth/password/edit', reset_password_token: @resource.send(:set_reset_password_token)) %></p>
 <% else %>
-<p><%= link_to 'Confirm my account', frontend_url('auth/confirmation', confirmation_token: @token) %></p>
+  <p><%= link_to 'Confirmar minha conta', frontend_url('auth/confirmation', confirmation_token: @token) %></p>
 <% end %>
