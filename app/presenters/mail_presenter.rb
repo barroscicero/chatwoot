@@ -8,7 +8,13 @@ class MailPresenter < SimpleDelegator
   end
 
   def subject
-    encode_to_unicode(@mail.subject)
+    result = encode_to_unicode(@mail.subject)
+    subject_array = result.split('|')
+    if subject_array.length > 1
+      subject_array[1]
+    else
+      result
+    end
   end
 
   # encode decoded mail text_part or html_part if mail is multipart email
