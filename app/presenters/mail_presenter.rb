@@ -17,6 +17,16 @@ class MailPresenter < SimpleDelegator
     end
   end
 
+  def protocolo
+    result = encode_to_unicode(@mail.subject)
+    subject_array = result.split('|')
+    if subject_array.length > 1
+      subject_array[2]
+    else
+      result
+    end
+  end
+
   # encode decoded mail text_part or html_part if mail is multipart email
   # encode decoded mail raw bodyt if mail is not multipart email but the body content is text/html
   def mail_content(mail_part)
@@ -106,7 +116,8 @@ class MailPresenter < SimpleDelegator
       number_of_attachments: number_of_attachments,
       subject: subject,
       text_content: text_content,
-      to: to
+      to: to,
+      protocolo: protocolo
     }
   end
 
