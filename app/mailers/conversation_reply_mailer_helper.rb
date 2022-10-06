@@ -48,7 +48,7 @@ module ConversationReplyMailerHelper
   end
 
   def email_from
-    email_smtp_enabled ? @channel.email : from_email_with_name
+    ENV.fetch('MAILER_SENDER_EMAIL', 'Chatwoot <accounts@chatwoot.com>')
   end
 
   def email_reply_to
