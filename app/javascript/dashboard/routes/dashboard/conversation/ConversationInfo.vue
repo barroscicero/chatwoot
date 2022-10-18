@@ -8,7 +8,7 @@
     />
     <contact-details-item
         v-if="protocolo"
-        :title="Protocolo"
+        :title="$t('CONTACT_PANEL.PROTOCOLO')"
         :value="protocolo"
         class="conversation--attribute"
     />
@@ -81,6 +81,10 @@ export default {
     {
       name: 'initiated_at',
       label: 'CONTACT_PANEL.INITIATED_AT',
+    },
+    {
+      name: 'protocolo',
+      label: 'CONTACT_PANEL.PROTOCOLO',
     },
     {
       name: 'referer',

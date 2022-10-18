@@ -13,6 +13,7 @@
     "OS": "Sistema Operacional",
     "INITIATED_FROM": "A partir de",
     "INITIATED_AT": "Iniciado em",
+    "PROTOCOLO": "Protocolo",
     "IP_ADDRESS": "Endereço IP",
     "NEW_MESSAGE": "Nova Mensagem",
     "CONVERSATIONS": {
