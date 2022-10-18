@@ -1,56 +1,62 @@
 <template>
   <div class="conversation--details">
     <contact-details-item
-      v-if="initiatedAt"
-      :title="$t('CONTACT_PANEL.INITIATED_AT')"
-      :value="initiatedAt.timestamp"
-      class="conversation--attribute"
+        v-if="initiatedAt"
+        :title="$t('CONTACT_PANEL.INITIATED_AT')"
+        :value="initiatedAt.timestamp"
+        class="conversation--attribute"
     />
     <contact-details-item
-      v-if="browserLanguage"
-      :title="$t('CONTACT_PANEL.BROWSER_LANGUAGE')"
-      :value="browserLanguage"
-      class="conversation--attribute"
+        v-if="protocolo"
+        :title="Protocolo"
+        :value="protocolo"
+        class="conversation--attribute"
     />
     <contact-details-item
-      v-if="referer"
-      :title="$t('CONTACT_PANEL.INITIATED_FROM')"
-      :value="referer"
-      class="conversation--attribute"
+        v-if="browserLanguage"
+        :title="$t('CONTACT_PANEL.BROWSER_LANGUAGE')"
+        :value="browserLanguage"
+        class="conversation--attribute"
+    />
+    <contact-details-item
+        v-if="referer"
+        :title="$t('CONTACT_PANEL.INITIATED_FROM')"
+        :value="referer"
+        class="conversation--attribute"
     >
       <a :href="referer" rel="noopener noreferrer nofollow" target="_blank">
         {{ referer }}
       </a>
     </contact-details-item>
     <contact-details-item
-      v-if="browserName"
-      :title="$t('CONTACT_PANEL.BROWSER')"
-      :value="browserName"
-      class="conversation--attribute"
+        v-if="browserName"
+        :title="$t('CONTACT_PANEL.BROWSER')"
+        :value="browserName"
+        class="conversation--attribute"
     />
     <contact-details-item
-      v-if="platformName"
-      :title="$t('CONTACT_PANEL.OS')"
-      :value="platformName"
-      class="conversation--attribute"
+        v-if="platformName"
+        :title="$t('CONTACT_PANEL.OS')"
+        :value="platformName"
+        class="conversation--attribute"
     />
     <contact-details-item
-      v-if="ipAddress"
-      :title="$t('CONTACT_PANEL.IP_ADDRESS')"
-      :value="ipAddress"
-      class="conversation--attribute"
+        v-if="ipAddress"
+        :title="$t('CONTACT_PANEL.IP_ADDRESS')"
+        :value="ipAddress"
+        class="conversation--attribute"
     />
     <custom-attributes
-      attribute-type="conversation_attribute"
-      attribute-class="conversation--attribute"
-      :class="customAttributeRowClass"
+        attribute-type="conversation_attribute"
+        attribute-class="conversation--attribute"
+        :class="customAttributeRowClass"
     />
-    <custom-attribute-selector attribute-type="conversation_attribute" />
+    <custom-attribute-selector attribute-type="conversation_attribute"/>
   </div>
 </template>
 
 <script>
-import { getLanguageName } from '../../../components/widgets/conversation/advancedFilterItems/languages';
+import {getLanguageName} from '../../../components/widgets/conversation/advancedFilterItems/languages';
 import ContactDetailsItem from './ContactDetailsItem.vue';
 import CustomAttributes from './customAttributes/CustomAttributes.vue';
 import CustomAttributeSelector from './customAttributes/CustomAttributeSelector.vue';
@@ -100,6 +106,9 @@ export default {
     initiatedAt() {
       return this.conversationAttributes.initiated_at;
     },
+    protocolo() {
+      return this.conversationAttributes.protocolo;
+    },
     browserName() {
       if (!this.conversationAttributes.browser) {
         return '';
@@ -124,19 +133,20 @@ export default {
       return `${platformName || ''} ${platformVersion || ''}`;
     },
     ipAddress() {
-      const { created_at_ip: createdAtIp } = this.contactAttributes;
+      const {created_at_ip: createdAtIp} = this.contactAttributes;
       return createdAtIp;
     },
     customAttributeRowClass() {
       const attributes = [
         'initiatedAt',
         'referer',
+        'protocolo',
         'browserName',
         'platformName',
         'ipAddress',
       ];
       const availableAttributes = attributes.filter(
-        attribute => !!this[attribute]
+          attribute => !!this[attribute]
       );
       return availableAttributes.length % 2 === 0 ? 'even' : 'odd';
     },
