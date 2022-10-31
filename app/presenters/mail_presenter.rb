@@ -60,7 +60,7 @@ class MailPresenter < SimpleDelegator
 
     encoding = @decoded_text_content.encoding
 
-    body = EmailReplyTrimmer.trim(@decoded_text_content + '-text')
+    body = EmailReplyTrimmer.trim(@decoded_text_content)
 
     return {} if @decoded_text_content.blank? || !text_mail_body?
 
@@ -77,7 +77,7 @@ class MailPresenter < SimpleDelegator
 
     return {} if @decoded_html_content.blank? || !html_mail_body?
 
-    body = EmailReplyTrimmer.trim(@decoded_html_content+'-html')
+    body = EmailReplyTrimmer.trim(@decoded_html_content)
 
     @html_content ||= {
       full: mail_content(html_part),
