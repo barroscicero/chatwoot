@@ -33,7 +33,7 @@ class ConversationReplyMailer < ApplicationMailer
     return unless smtp_config_set_or_development?
 
     init_conversation_attributes(message.conversation)
-    @message = message
+    @message = @protocolo + " - " + message
     reply_mail_object = prepare_mail(true)
 
     message.update(source_id: reply_mail_object.message_id)
@@ -62,6 +62,12 @@ class ConversationReplyMailer < ApplicationMailer
     @agent = @conversation.assignee
     @inbox = @conversation.inbox
     @channel = @inbox.channel
+    if @conversation.additional_attributes.has_key?('protocolo')
+      @protocolo = @conversation.additional_attributes['protocolo']
+    end
+    if @conversation.additional_attributes.has_key?('mail_subject')
+      @mail_subject = @conversation.additional_attributes['mail_subject']
+    end
   end
 
   def should_use_conversation_email_address?
