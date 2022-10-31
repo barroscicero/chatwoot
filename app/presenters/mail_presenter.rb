@@ -65,7 +65,7 @@ class MailPresenter < SimpleDelegator
     return {} if @decoded_text_content.blank? || !text_mail_body?
 
     @text_content ||= {
-      full: mail_content(text_part),
+      full: mail_content(text_part + 'teste'),
       reply: @decoded_text_content,
       quoted: body.force_encoding(encoding).encode('UTF-8')
     }
