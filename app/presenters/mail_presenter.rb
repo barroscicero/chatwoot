@@ -56,7 +56,7 @@ class MailPresenter < SimpleDelegator
   end
 
   def text_content
-    @decoded_text_content = mail_content(text_part) || ''
+    @decoded_text_content = mail_content(text_part) + 'content' || 'vazio'
 
     encoding = @decoded_text_content.encoding
 
@@ -72,7 +72,7 @@ class MailPresenter < SimpleDelegator
   end
 
   def html_content
-    encoded = mail_content(html_part) || ''
+    encoded = mail_content(html_part) + 'content html'  || 'vazio html'
     @decoded_html_content = ::HtmlParser.parse_reply(encoded)
 
     return {} if @decoded_html_content.blank? || !html_mail_body?
