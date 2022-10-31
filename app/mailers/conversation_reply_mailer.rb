@@ -33,7 +33,7 @@ class ConversationReplyMailer < ApplicationMailer
     return unless smtp_config_set_or_development?
 
     init_conversation_attributes(message.conversation)
-    @message = @protocolo + " - " + message
+    @message = message
     reply_mail_object = prepare_mail(true)
 
     message.update(source_id: reply_mail_object.message_id)
