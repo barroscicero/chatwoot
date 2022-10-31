@@ -60,12 +60,12 @@ class MailPresenter < SimpleDelegator
 
     encoding = @decoded_text_content.encoding
 
-    body = EmailReplyTrimmer.trim(@decoded_text_content)
+    body = EmailReplyTrimmer.trim(@decoded_text_content + '-text')
 
     return {} if @decoded_text_content.blank? || !text_mail_body?
 
     @text_content ||= {
-      full: mail_content(text_part + 'teste'),
+      full: mail_content(text_part),
       reply: @decoded_text_content,
       quoted: body.force_encoding(encoding).encode('UTF-8')
     }
@@ -77,7 +77,7 @@ class MailPresenter < SimpleDelegator
 
     return {} if @decoded_html_content.blank? || !html_mail_body?
 
-    body = EmailReplyTrimmer.trim(@decoded_html_content)
+    body = EmailReplyTrimmer.trim(@decoded_html_content+'-html')
 
     @html_content ||= {
       full: mail_content(html_part),
