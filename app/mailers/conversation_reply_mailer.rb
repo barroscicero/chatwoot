@@ -35,7 +35,7 @@ class ConversationReplyMailer < ApplicationMailer
     init_conversation_attributes(message.conversation)
     @message = message
     @temp_content = message.content
-    @message.content = 'Protocolo: ' + @protocolo + '\n\n' + message.content
+    @message.content = "Protocolo: " + @protocolo + "\n\n" + message.content
     reply_mail_object = prepare_mail(true)
     message.content = @temp_content
     message.update(source_id: reply_mail_object.message_id)
