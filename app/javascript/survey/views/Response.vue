@@ -38,8 +38,7 @@
           <custom-button 
             @click="updateSurveyDetails"
           >
-            <spinner v-if="feedback" class="p-0" />
-              {{ $t('SURVEY.RATING.BUTTON_TEXT')  }}
+            {{ $t('SURVEY.RATING.BUTTON_TEXT')  }}
           </custom-button>
         </div>
         <feedback
