@@ -1,41 +1,47 @@
 <template>
-  <div
-    v-if="isLoading"
-    class="flex flex-1 items-center h-full bg-black-25 justify-center"
-  >
+  <div v-if="isLoading" class="flex flex-1 items-center h-full bg-black-25 justify-center">
     <spinner size="" />
   </div>
-  <div
-    v-else
-    class="w-full h-full flex overflow-auto bg-slate-50 items-center justify-center"
-  >
-    <div
-      class="flex bg-white shadow-lg rounded-lg flex-col w-full lg:w-2/5 h-full lg:h-auto"
-    >
+  <div v-else class="w-full h-full flex overflow-auto bg-slate-50 items-center justify-center">
+    <div class="flex bg-white shadow-lg rounded-lg flex-col w-full lg:w-2/5 h-full lg:h-auto">
       <div class="w-full my-0 m-auto px-12 pt-12 pb-6">
         <img v-if="logo" :src="logo" alt="Chatwoot logo" class="logo mb-6" />
-        <p
-          v-if="!isRatingSubmitted"
-          class="text-black-700 text-lg leading-relaxed mb-8"
-        >
-          {{ $t('SURVEY.DESCRIPTION', { inboxName }) }}
+        <p v-if="!isRatingSubmitted" class="text-black-700 text-lg leading-relaxed mb-8">
+          {{ $t('SURVEY.DESCRIPTION') }}
         </p>
-        <banner
-          v-if="shouldShowBanner"
+        <banner v-if="shouldShowBanner"
           :show-success="shouldShowSuccessMesage"
           :show-error="shouldShowErrorMesage"
           :message="message"
         />
-        <label
-          v-if="!isRatingSubmitted"
-          class="text-base font-medium text-black-800 mb-4"
-        >
-          {{ $t('SURVEY.RATING.LABEL') }}
-        </label>
-        <rating
-          :selected-rating="selectedRating"
-          @selectRating="selectRating"
-        />
+
+        <div v-if="!isRatingSubmitted">
+          <label class="text-base font-medium text-black-800 mb-4">
+            {{ $t('SURVEY.RATING.LABEL_TECHNOLOGY') }}
+          </label>
+          <rating
+            :selected-rating="selectedRatingTechnology"
+            radioName="radioTechnolody"
+            @selectRating="selectRatingTechnology"
+          />
+          <label class="text-base font-medium text-black-800 mb-4">
+            {{ $t('SURVEY.RATING.LABEL_CONVERSATION') }}
+          </label>
+          <rating
+            :selected-rating="selectedRating"
+            radioName="radioConversation"
+            @selectRating="selectRating"
+          />
+        </div>
+        
+        <div v-if="!isButtonDisabled" class="flex items-center font-medium float-right">
+          <custom-button 
+            @click="updateSurveyDetails"
+          >
+            <spinner v-if="feedback" class="p-0" />
+              {{ $t('SURVEY.RATING.BUTTON_TEXT')  }}
+          </custom-button>
+        </div>
         <feedback
           v-if="enableFeedbackForm"
           :is-updating="isUpdating"
@@ -44,15 +50,13 @@
           @sendFeedback="sendFeedback"
         />
       </div>
-      <div class="mb-3">
-        <branding />
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Branding from 'shared/components/Branding';
+import CustomButton from 'shared/components/Button';
 import Spinner from 'shared/components/Spinner';
 import Rating from 'survey/components/Rating';
 import Feedback from 'survey/components/Feedback';
@@ -65,6 +69,7 @@ export default {
   name: 'Response',
   components: {
     Branding,
+    CustomButton,
     Rating,
     Spinner,
     Banner,
@@ -84,10 +89,10 @@ export default {
       isLoading: false,
       errorMessage: null,
       selectedRating: null,
+      selectedRatingTechnology: null,
       feedbackMessage: '',
       isUpdating: false,
       logo: '',
-      inboxName: '',
     };
   },
   computed: {
@@ -102,7 +107,8 @@ export default {
       return this.surveyDetails && this.surveyDetails.feedback_message;
     },
     isButtonDisabled() {
-      return !(this.selectedRating && this.feedback);
+      return !(this.selectedRating && this.selectedRatingTechnology && 
+      !this.enableFeedbackForm && !this.shouldShowSuccessMesage && !this.shouldShowErrorMesage);
     },
     shouldShowBanner() {
       return this.isRatingSubmitted || this.errorMessage;
@@ -129,7 +135,9 @@ export default {
   methods: {
     selectRating(rating) {
       this.selectedRating = rating;
-      this.updateSurveyDetails();
+    },
+    selectRatingTechnology(rating) {
+      this.selectedRatingTechnology = rating;
     },
     sendFeedback(message) {
       this.feedbackMessage = message;
@@ -140,9 +148,9 @@ export default {
       try {
         const result = await getSurveyDetails({ uuid: this.surveyId });
         this.logo = result.data.inbox_avatar_url;
-        this.inboxName = result.data.inbox_name;
         this.surveyDetails = result?.data?.csat_survey_response;
         this.selectedRating = this.surveyDetails?.rating;
+        this.selectedRatingTechnology = this.surveyDetails?.rating_technology;
         this.feedbackMessage = this.surveyDetails?.feedback_message || '';
         this.setLocale(result.data.locale);
       } catch (error) {
@@ -160,6 +168,7 @@ export default {
             submitted_values: {
               csat_survey_response: {
                 rating: this.selectedRating,
+                rating_technology: this.selectedRatingTechnology,
                 feedback_message: this.feedbackMessage,
               },
             },
@@ -171,6 +180,7 @@ export default {
         });
         this.surveyDetails = {
           rating: this.selectedRating,
+          rating_technology: this.selectedRatingTechnology,
           feedback_message: this.feedbackMessage,
         };
       } catch (error) {

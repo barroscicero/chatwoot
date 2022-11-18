@@ -1,12 +1,14 @@
 {
   "SURVEY": {
-    "DESCRIPTION": "Caro cliente 👋, por favor, reserve alguns instantes para compartilhar feedback sobre a conversa que você teve com %{inboxName}.",
+    "DESCRIPTION": "Caro contribuinte 👋, por favor, reserve alguns instantes para compartilhar um feedback sobre a conversa que você teve com o atendente da SEFAZ PI.",
     "RATING": {
-      "LABEL": "Avalie sua conversa",
-      "SUCCESS_MESSAGE": "Obrigado por enviar a classificação"
+      "LABEL_CONVERSATION": "Quanto à agilidade, clareza e resolutividade do atendimento, que nota você daria?",
+      "LABEL_TECHNOLOGY": "Sobre a parte tecnológica do atendimento (página eletrônica, aplicativo, facilidade de acesso, disponibilidade, etc), que nota você atribui?",
+      "SUCCESS_MESSAGE": "Obrigado por enviar a classificação!",
+      "BUTTON_TEXT": "Avaliar"
     },
     "FEEDBACK": {
-      "LABEL": "Você tem alguma ideia que gostaria de compartilhar?",
+      "LABEL": "Obrigada pela avaliação! Se desejar, pode deixar mais comentários aqui.",
       "PLACEHOLDER": "Seu feedback (opcional)",
       "BUTTON_TEXT": "Enviar feedback"
     },
