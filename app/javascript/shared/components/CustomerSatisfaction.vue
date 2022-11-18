@@ -1,22 +1,38 @@
 <template>
-  <div
-    class="customer-satisfaction"
-    :class="$dm('bg-white', 'dark:bg-slate-700')"
-    :style="{ borderColor: widgetColor }"
-  >
-    <h6 class="title" :class="$dm('text-slate-900', 'dark:text-slate-50')">
+  <div class="customer-satisfaction" :style="{ borderColor: widgetColor }">
+    <h6 v-if="!isRatingSubmitted && !isRatingTechSubmitted" class="title"
+      :class="$dm('text-slate-900', 'dark:text-slate-50')">
+      {{ $t('CSAT.TITLE_TECHNOLOGY') }}
+    </h6>
+    <div v-if="!isRatingSubmitted && !isRatingTechSubmitted" class="ratings">
+      <div v-for="rating in ratings">
+        <input type="radio" 
+          v-model="ratingTechValue"
+          :class="buttonClass(rating)" 
+          name="ratingTechValue" 
+          :value="rating.value"
+          @click="selectRating(rating)"
+          > 
+           {{rating.value}}
+      </div>
+    </div>
+
+    <h6 class="title">
       {{ title }}
     </h6>
-    <div class="ratings">
-      <button
-        v-for="rating in ratings"
-        :key="rating.key"
-        :class="buttonClass(rating)"
-        @click="selectRating(rating)"
-      >
-        {{ rating.emoji }}
-      </button>
+    <div v-if="!isRatingSubmitted && !isRatingTechSubmitted" class="ratings">
+      <div v-for="rating in ratings">
+        <input type="radio" 
+          v-model="ratingValue"
+          :class="buttonClass(rating)" 
+          name="ratingValue" 
+          :value="rating.value"
+          @click="selectRatingTechnology(rating)"
+          > 
+           {{rating.value}}
+      </div>
     </div>
+
     <form
       v-if="!isFeedbackSubmitted"
       class="feedback-form"
@@ -25,9 +41,8 @@
       <input
         v-model="feedback"
         class="form-input"
-        :class="inputColor"
         :placeholder="$t('CSAT.PLACEHOLDER')"
-        @keydown.enter="onSubmit"
+        @keyup.enter="onSubmit"
       />
       <button
         class="button small"
@@ -69,39 +84,44 @@ export default {
       email: '',
       ratings: CSAT_RATINGS,
       selectedRating: null,
+      selectedRatingTechnology: null,
       isUpdating: false,
       feedback: '',
+      ratingValue: null,
+      ratingTechValue: null
     };
   },
   computed: {
-    ...mapGetters({ widgetColor: 'appConfig/getWidgetColor' }),
+    ...mapGetters({
+      widgetColor: 'appConfig/getWidgetColor',
+    }),
     isRatingSubmitted() {
       return this.messageContentAttributes?.csat_survey_response?.rating;
+    },
+    isRatingTechSubmitted() {
+      return this.messageContentAttributes?.csat_survey_response?.rating_technology;
     },
     isFeedbackSubmitted() {
       return this.messageContentAttributes?.csat_survey_response
         ?.feedback_message;
     },
     isButtonDisabled() {
-      return !(this.selectedRating && this.feedback);
-    },
-    inputColor() {
-      return `${this.$dm('bg-white', 'dark:bg-slate-600')}
-        ${this.$dm('text-black-900', 'dark:text-slate-50')}`;
+      return !(this.selectedRating && this.selectedRatingTechnology && this.feedback);
     },
     title() {
-      return this.isRatingSubmitted
+      return this.isRatingSubmitted && this.isRatingTechSubmitted
         ? this.$t('CSAT.SUBMITTED_TITLE')
-        : this.$t('CSAT.TITLE');
+        : this.$t('CSAT.TITLE_CONVERSATION');
     },
   },
 
   mounted() {
-    if (this.isRatingSubmitted) {
+    if (this.isRatingSubmitted && this.isRatingTechSubmitted) {
       const {
-        csat_survey_response: { rating, feedback_message },
+        csat_survey_response: { rating, rating_technology, feedback_message },
       } = this.messageContentAttributes;
       this.selectedRating = rating;
+      this.selectedRatingTechnology = rating_technology;
       this.feedback = feedback_message;
     }
   },
@@ -109,10 +129,9 @@ export default {
   methods: {
     buttonClass(rating) {
       return [
-        { selected: rating.value === this.selectedRating },
+        { checked: rating.value === this.selectedRatingTechnology },
         { disabled: this.isRatingSubmitted },
         { hover: this.isRatingSubmitted },
-        'emoji-button',
       ];
     },
     async onSubmit() {
@@ -122,6 +141,7 @@ export default {
           submittedValues: {
             csat_survey_response: {
               rating: this.selectedRating,
+              rating_technology: this.selectedRatingTechnology,
               feedback_message: this.feedback,
             },
           },
@@ -134,8 +154,16 @@ export default {
       }
     },
     selectRating(rating) {
-      this.selectedRating = rating.value;
-      this.onSubmit();
+      this.selectedRating = rating.value
+      if (this.selectedRatingTechnology) {
+        this.onSubmit();
+      }
+    },
+    selectRatingTechnology(rating) {
+      this.selectedRatingTechnology = rating.value
+      if (this.selectedRating) {
+        this.onSubmit();
+      }
     },
   },
 };

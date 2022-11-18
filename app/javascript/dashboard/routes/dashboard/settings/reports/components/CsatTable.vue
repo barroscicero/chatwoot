@@ -80,13 +80,28 @@ export default {
           key: 'rating',
           title: this.$t('CSAT_REPORTS.TABLE.HEADER.RATING'),
           align: 'center',
-          width: 80,
+          width: 200,
           renderBodyCell: ({ row }) => {
             const [ratingObject = {}] = CSAT_RATINGS.filter(
               rating => rating.value === row.rating
             );
             return (
-              <span class="emoji-response">{ratingObject.emoji || '---'}</span>
+              <span class="emoji-response">{ratingObject.value || '---'}</span>
+            );
+          },
+        },
+        {
+          field: 'rating_technology',
+          key: 'rating_technology',
+          title: this.$t('CSAT_REPORTS.TABLE.HEADER.RATING_TECHNOLOGY'),
+          align: 'center',
+          width: 200,
+          renderBodyCell: ({ row }) => {
+            const [ratingTechObject = {}] = CSAT_RATINGS.filter(
+              rating_technology => rating_technology.value === row.rating_technology
+            );
+            return (
+              <span class="emoji-response">{ratingTechObject.value || '---'}</span>
             );
           },
         },
@@ -127,6 +142,7 @@ export default {
         contact: response.contact,
         assignedAgent: response.assigned_agent,
         rating: response.rating,
+        rating_technology: response.rating_technology,
         feedbackText: response.feedback_message || '---',
         conversationId: response.conversation_id,
         createdAgo: this.dynamicTime(response.created_at),

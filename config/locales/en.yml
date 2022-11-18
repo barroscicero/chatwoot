@@ -99,7 +99,8 @@ en:
         contact_phone_number: Contact Phone Number
         link_to_the_conversation: Link to the conversation
         agent_name: Agent Name
-        rating: Rating
+        rating: Conversation Rating
+        rating_technology: Technology Rating
         feedback: Feedback Comment
         recorded_at: Recorded date
 

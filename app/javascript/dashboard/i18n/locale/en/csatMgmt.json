@@ -1,6 +1,7 @@
 {
   "CSAT": {
-    "TITLE": "Rate your conversation",
+    "TITLE_TECHNOLOGY": "How do you rate the technical part of the service (webpage, application, ease of access, availability, etc.)?",
+    "TITLE_CONVERSATION": "About the agility, clarity and resolution of the service, what grade would you give?",
     "PLACEHOLDER": "Tell us more..."
   }
 }

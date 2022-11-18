@@ -2,6 +2,7 @@
   CSV.generate_line([
     I18n.t('reports.csat.headers.agent_name'),
     I18n.t('reports.csat.headers.rating'),
+    I18n.t('reports.csat.headers.rating_technology'),
     I18n.t('reports.csat.headers.feedback'),
     I18n.t('reports.csat.headers.contact_name'),
     I18n.t('reports.csat.headers.contact_email_address'),
@@ -18,6 +19,7 @@
   CSV.generate_line([
     assigned_agent ? "#{assigned_agent.name} (#{assigned_agent.email})" : nil,
     csat_response.rating,
+    csat_response.rating_technology,
     csat_response.feedback_message.present? ? csat_response.feedback_message : nil,
     contact&.name.present? ? contact&.name: nil,
     contact&.email.present? ? contact&.email: nil,

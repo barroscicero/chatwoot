@@ -79,14 +79,15 @@ pt:
     default_group_by: dia
     csat:
       headers:
-        contact_name: Contact Name
-        contact_email_address: Contact Email Address
-        contact_phone_number: Contact Phone Number
-        link_to_the_conversation: Link to the conversation
-        agent_name: Nome do Representante
-        rating: Avaliar
-        feedback: Feedback Comment
-        recorded_at: Recorded date
+        contact_name: Nome do contato
+        contact_email_address: E-mail de contato
+        contact_phone_number: Telefone de contato
+        link_to_the_conversation: Link para a conversa
+        agent_name: Nome do Agente
+        rating: Avaliação da Conversa
+        rating_technology: Avaliação da Tecnologia
+        feedback: Comentário de Feedback
+        recorded_at: Data de gravação
   notifications:
     notification_title:
       conversation_creation: "[Nova conversa] - #%{display_id} foi criada em %{inbox_name}"

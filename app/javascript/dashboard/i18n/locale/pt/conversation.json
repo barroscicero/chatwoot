@@ -38,7 +38,8 @@
     "SUCCESS_DELETE_MESSAGE": "Mensagem apagada com sucesso",
     "FAIL_DELETE_MESSSAGE": "Não foi possível apagar a mensagem! Tente novamente",
     "NO_RESPONSE": "Sem resposta",
-    "RATING_TITLE": "Avaliar",
+    "RATING_TITLE": "Avaliação da Conversa",
+    "RATING_TECHNOLOGY_TITLE": "Avaliação da Tecnologia",
     "FEEDBACK_TITLE": "Opiniões",
     "HEADER": {
       "RESOLVE_ACTION": "Resolver",

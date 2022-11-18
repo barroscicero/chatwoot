@@ -365,7 +365,8 @@
       "HEADER": {
         "CONTACT_NAME": "Contact",
         "AGENT_NAME": "Assigned agent",
-        "RATING": "Rating",
+        "RATING": "Conversation Rating",
+        "RATING_TECHNOLOGY": "Technology Rating",
         "FEEDBACK_TEXT": "Feedback comment"
       }
     },
