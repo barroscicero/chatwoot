@@ -49,6 +49,9 @@
           @sendFeedback="sendFeedback"
         />
       </div>
+      <div class="mb-3">
+        <branding></branding>
+      </div>
     </div>
   </div>
 </template>
