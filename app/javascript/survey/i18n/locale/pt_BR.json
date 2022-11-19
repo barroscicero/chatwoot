@@ -1,14 +1,14 @@
 {
   "SURVEY": {
-    "DESCRIPTION": "Caro contribuinte 👋, por favor, reserve alguns instantes para compartilhar um feedback sobre a conversa que você teve com o atendente da SEFAZ PI.",
+    "DESCRIPTION": "Caro contribuinte, por favor, reserve alguns instantes para dar um feedback sobre a conversa que você teve com a SEFAZ-PI.",
     "RATING": {
       "LABEL_CONVERSATION": "Quanto à agilidade, clareza e resolutividade do atendimento, que nota você daria?",
       "LABEL_TECHNOLOGY": "Sobre a parte tecnológica do atendimento (página eletrônica, aplicativo, facilidade de acesso, disponibilidade, etc), que nota você atribui?",
-      "SUCCESS_MESSAGE": "Obrigado por enviar a classificação!",
+      "SUCCESS_MESSAGE": "Obrigada pela avaliação!",
       "BUTTON_TEXT": "Avaliar"
     },
     "FEEDBACK": {
-      "LABEL": "Obrigada pela avaliação! Se desejar, pode deixar mais comentários aqui.",
+      "LABEL": "Se desejar, pode deixar mais comentários aqui.",
       "PLACEHOLDER": "Seu feedback (opcional)",
       "BUTTON_TEXT": "Enviar feedback"
     },
@@ -17,5 +17,5 @@
       "ERROR_MESSAGE": "Não foi possível conectar ao servidor Woot, por favor tente novamente mais tarde"
     }
   },
-  "POWERED_BY": "Desenvolvido por Chatwoot"
+  "POWERED_BY": "Desenvolvido por Quickks"
 }

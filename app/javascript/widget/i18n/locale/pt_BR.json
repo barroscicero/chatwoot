@@ -34,7 +34,7 @@
   "BUBBLE": {
     "LABEL": "Fale conosco no chat"
   },
-  "POWERED_BY": "Desenvolvido por Chatwoot",
+  "POWERED_BY": "Desenvolvido por Quickks",
   "EMAIL_PLACEHOLDER": "Por favor, insira seu e-mail",
   "CHAT_PLACEHOLDER": "Digite sua mensagem",
   "TODAY": "Hoje",
@@ -75,7 +75,7 @@
   },
   "CSAT": {
     "TITLE": "Avalie sua conversa",
-    "SUBMITTED_TITLE": "Obrigado por enviar a classificação",
+    "SUBMITTED_TITLE": "Obrigada pela avaliação!",
     "PLACEHOLDER": "Conte-nos mais..."
   },
   "EMAIL_TRANSCRIPT": {
