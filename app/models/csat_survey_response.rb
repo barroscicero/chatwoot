@@ -5,6 +5,7 @@
 #  id                :bigint           not null, primary key
 #  feedback_message  :text
 #  rating            :integer          not null
+#  rating_technology :integer          not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  account_id        :bigint           not null
