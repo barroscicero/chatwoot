@@ -128,8 +128,8 @@ export default {
                 <router-link to={routerParams}>
                   {`#${row.conversationId}`}
                 </router-link>
-                <div class="csat--timestamp" v-tooltip={row.createdAt}>
-                  {row.createdAgo}
+                <div class="csat--timestamp" v-tooltip={row.createdAgo}>
+                  {row.createdAt}
                 </div>
               </div>
             );
