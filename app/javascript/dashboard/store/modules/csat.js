@@ -59,7 +59,7 @@ export const getters = {
     return computeDistribution(
       _state.metrics.ratingsCount[9] + _state.metrics.ratingsCount[10] + 
       _state.metrics.ratingsTechCount[9] + _state.metrics.ratingsTechCount[10],
-      _state.metrics.totalResponseCount
+      _state.metrics.totalResponseCount * 2
     );
   },
   getResponseRate(_state) {
